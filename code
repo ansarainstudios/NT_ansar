@@ -1,0 +1,70 @@
+# Maintained by: toleda for: github.com/toleda/audio_cloverALC
+# File: audio_cloverALCXXX-90_patch.sh_v1.0
+# Credit: abxite
+#
+# OS X Clover Realtek ALC Onboard Audio
+# Clover Patched AppleHDA Method
+# github.com/toleda/audio_cloverALC
+#
+# Enables OS X Realtek CloverALC onboard audio in Mavericks 10.9 and newer
+# 1. Verify native System/Library/Extensions/AppleHDA.kext
+# 2. Verify Downloads/audio_ALC-master present
+# 3. cloverALC/audio_cloverALCXXX-90-patch
+#    1. Verify Clover/config.plist/Devices/Audio/Inject/(Audio ID: 3)
+#    2. Verify Clover/config.plist/KernelAndKextPatches/KextsToPatch/AppleHDA/ALCXXX
+#    3. Verify Clover/config.plist/KernelAndKextPatches/KextsToPatch/AppleHDA/xml>zml
+#    4. Verify EFI/Clover/kexts/10.x/realtekALC.kext
+#
+# Installation
+# 1. Downloads/audio_ALC-master/cloverALC/audio_cloverALC233-90_patch.command
+# 2. Double click audio_cloverALCXXX-90_patch.command (Do not move folder or file)
+# 3. Enter password at prompt
+# 4. Restart
+
+Support Codec ALC 233, 268, 269, 270, 272, 275, 280, 282, 283, 288, 290, 663, 888, 892 
+Layout dan Platform Form MIRONE
+
+JANGAN PINDAHKAN FILE…JALANKAN DI FOLDER DOWNLOAD..
+
+0. UNTUK Yosemite Set flag kext-dev-mode=1. Set Clover Config (cek config.plist file)
+2. Bagi yang pakai DSDT. Patch DSDT :
+
+
+Method (_DSM, 4, NotSerialized)
+{
+Store (Package (0x0c)
+{                        
+"built-in", 
+Buffer (One)
+{
+0x00
+}, 
+"layout-id", 
+Buffer (0x04)
+{
+0x03, 0x00, 0x00, 0x00
+}, 
+"PinConfigurations", 
+Buffer (0x00)
+{
+0x00
+}
+}, Local0)
+DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+Return (Local0)
+}
+
+3. Bagi yang ga Pakai DSDT inject device audio nilai 3 di Clover.
+4. Kopi realtekALC.kext ke Clover/kext/10.x
+5. Jalankan Script audio_cloverALCXXX-90_patch.command di Folder cloverALC
+6. reboot
+
+* Codeccomamder.kext buat fix sound after sleep
+
+
+Thx for community, Insanelymac dan Hackintosh Indonesia
+
+
+ttd Tri Wahyudi 
+
+
